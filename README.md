@@ -3,7 +3,7 @@
 To run tests continuously:
 
 ```
-watchexec -c -p -e 'ex,exs,lock' -- mix test
+mix test.watch --stale
 ```
 
 To add a new day:
