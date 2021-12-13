@@ -28,8 +28,6 @@ defmodule AdventOfCode2021.Day6Lanternfish do
 
   defp generation(fish, 0), do: fish
   defp generation(fish, x) do
-    # IO.inspect(Enum.zip(fish, Enum.to_list(0..8)))
-
     [cnt | fish] = fish
 
     fish
@@ -45,7 +43,6 @@ defmodule AdventOfCode2021.Day6Lanternfish do
   defp parse(input) do
     input
     |> String.split(~r/,/)
-    |> Enum.map(&Integer.parse/1)
-    |> Enum.map(fn {int, _} -> int end)
+    |> Enum.map(&String.to_integer/1)
   end
 end

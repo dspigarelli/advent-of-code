@@ -54,7 +54,6 @@ defmodule AdventOfCode2021.Day5HydrothermalVenture do
   defp parse_coordinate(coordinate) do
     coordinate
     |> String.split(",")
-    |> Enum.map(&Integer.parse(&1))
-    |> Enum.map(fn {int, ""} -> int end)
+    |> Enum.map(&String.to_integer(&1))
   end
 end

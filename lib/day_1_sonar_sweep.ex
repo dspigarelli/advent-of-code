@@ -18,8 +18,7 @@ defmodule AdventOfCode2021.Day1SonarSweep do
   defp parse(input) do
     input
     |> String.split("\n")
-    |> Enum.map(&Integer.parse/1)
-    |> Enum.map(&elem(&1, 0))
+    |> Enum.map(&String.to_integer/1)
   end
 
   defp get_lists(list, window) do

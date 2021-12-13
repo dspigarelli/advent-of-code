@@ -7,10 +7,10 @@ defmodule AdventOfCode2021.Day3BinaryDiagnostic do
     |> Enum.map(&String.split(&1, "", trim: true))
     |> Enum.zip_with(
       &Enum.reduce(&1, {0, 0}, fn x, {ones, length} ->
-        Integer.parse(x)
+        String.to_integer(x)
         |> case do
-          {0, _} -> {ones, length + 1}
-          {1, _} -> {ones + 1, length + 1}
+          0 -> {ones, length + 1}
+          1 -> {ones + 1, length + 1}
         end
       end)
     )
@@ -20,7 +20,7 @@ defmodule AdventOfCode2021.Day3BinaryDiagnostic do
     end)
     |> (fn x -> {x, length(x)} end).()
     |> (fn {x, len} ->
-          a = Enum.join(x) |> Integer.parse(2) |> elem(0)
+          a = Enum.join(x) |> String.to_integer(2)
           a * Bitwise.bxor(a, (:math.pow(2, len) - 1) |> round)
         end).()
   end

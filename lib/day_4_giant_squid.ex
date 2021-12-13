@@ -100,8 +100,6 @@ defmodule AdventOfCode2021.Day4GiantSquid do
   end
 
   defp array_to_int(list) when is_list(list) do
-    list
-    |> Enum.map(&Integer.parse/1)
-    |> Enum.map(fn {int, ""} -> int end)
+    Enum.map(list, &String.to_integer/1)
   end
 end

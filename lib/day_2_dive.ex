@@ -36,7 +36,7 @@ defmodule AdventOfCode2021.Day2Dive do
     |> String.split("\n")
     |> Enum.map(&String.split(&1))
     |> Enum.map(fn [direction, amount] ->
-      {amount, ""} = Integer.parse(amount)
+      amount = String.to_integer(amount)
       {String.to_atom(direction), amount}
     end)
   end
