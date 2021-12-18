@@ -16,18 +16,18 @@ defmodule AdventOfCode2021.Day9SmokeBasinTest do
       assert 15 = @example_input |> String.trim() |> part_1()
     end
 
-    # test "with puzzle input" do
-    #   assert 494 = puzzle_input() |> String.trim() |> part_1()
-    # end
+    test "with puzzle input" do
+      assert 494 = puzzle_input() |> String.trim() |> part_1()
+    end
   end
 
   describe "part_2/1" do
-    # test "example input" do
-    #   assert 0 = @example_input |> String.trim() |> part_2()
-    # end
+    test "example input" do
+      assert 1_134 = @example_input |> String.trim() |> part_2()
+    end
 
-    # test "with puzzle input" do
-    #   assert 0 = puzzle_input() |> String.trim() |> part_2()
-    # end
+    test "with puzzle input" do
+      assert 1_048_128 = puzzle_input() |> String.trim() |> part_2()
+    end
   end
 end
