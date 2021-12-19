@@ -31,8 +31,8 @@ defmodule AdventOfCode2021.Day11DumboOctopusTest do
       assert 195 = @example_input |> String.trim() |> part_2()
     end
 
-    # test "with puzzle input" do
-    #   assert 0 = puzzle_input() |> String.trim() |> part_2()
-    # end
+    test "with puzzle input" do
+      assert 214 = puzzle_input() |> String.trim() |> part_2()
+    end
   end
 end

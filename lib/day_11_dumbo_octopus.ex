@@ -8,8 +8,9 @@ defmodule AdventOfCode2021.Day11DumboOctopus do
   end
 
   def part_2(input) do
-    input
-    |> parse
+    { map, {_length, _height } = dimensions, neighbors} = parse(input)
+
+    iterate2(map, {0, 0, dimensions, neighbors})
   end
 
   defp build_neighbors(map, {x, y} = point, {length, height}) do
@@ -42,6 +43,32 @@ defmodule AdventOfCode2021.Day11DumboOctopus do
       calculate_flashes(map, flashes, dimensions, neighbors)
 
     iterate(map, {count - 1, flashes, dimensions, neighbors})
+  end
+
+  # defp iterate2(_map, {-1, flashes, _, _}), do: flashes
+  defp iterate2(map, {count, flashes, dimensions, neighbors}) do
+    # IO.puts("")
+    # print(map, dimensions)
+
+    # increment everything by 1;
+    map = advance(map, dimensions)
+
+    {map, flashes} =
+      calculate_flashes(map, flashes, dimensions, neighbors)
+
+    map_sum(map, dimensions)
+    |> case do
+      0 ->
+        IO.puts("Count: #{count+1}")
+        count+1
+      _ -> iterate2(map, {count + 1, flashes, dimensions, neighbors})
+    end
+  end
+
+  defp map_sum(map, dimensions) do
+    all_points(dimensions)
+    |> Enum.map(&Map.get(map, &1))
+    |> Enum.sum()
   end
 
   defp advance(map, dimensions) do
