@@ -59,7 +59,8 @@ defmodule AdventOfCode2021.Day11DumboOctopus do
     map_sum(map, dimensions)
     |> case do
       0 ->
-        IO.puts("Count: #{count+1}")
+        # print(map, dimensions)
+        # IO.puts("Count: #{count+1}")
         count+1
       _ -> iterate2(map, {count + 1, flashes, dimensions, neighbors})
     end
@@ -113,19 +114,19 @@ defmodule AdventOfCode2021.Day11DumboOctopus do
 
   defp all_points({length, height}), do: (for y <- 0..(height-1), x <- 0..(length-1), do: {x,y})
 
-  defp print(map, {length, height}) do
-    for y <- 0..(height-1) do
-      for x <- 0..(length-1) do
-        Map.get(map, {x,y})
-        |> case do
-          0 -> "."
-          x -> x
-        end
-      end
-      |> Enum.join()
-      |> IO.puts()
-    end
-  end
+  # defp print(map, {length, height}) do
+  #   for y <- 0..(height-1) do
+  #     for x <- 0..(length-1) do
+  #       Map.get(map, {x,y})
+  #       |> case do
+  #         0 -> "."
+  #         x -> x
+  #       end
+  #     end
+  #     |> Enum.join()
+  #     |> IO.puts()
+  #   end
+  # end
 
   defp parse(input) do
     rows =
