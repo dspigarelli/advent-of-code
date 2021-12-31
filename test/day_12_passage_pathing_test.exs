@@ -66,12 +66,20 @@ defmodule AdventOfCode2021.Day12PassagePathingTest do
   end
 
   describe "part_2/1" do
-    # test "example input" do
-    #   assert 0 = @example_input |> String.trim() |> part_2()
-    # end
+    test "example input" do
+      assert 36 = @example_input |> String.trim() |> part_2()
+    end
 
-    # test "with puzzle input" do
-    #   assert 0 = puzzle_input() |> String.trim() |> part_2()
-    # end
+    test "example input 2" do
+      assert 103 = @example_2_input |> String.trim() |> part_2()
+    end
+
+    test "example input 3" do
+      assert 3_509 = @example_3_input |> String.trim() |> part_2()
+    end
+
+    test "with puzzle input" do
+      assert 74_222 = puzzle_input() |> String.trim() |> part_2()
+    end
   end
 end
