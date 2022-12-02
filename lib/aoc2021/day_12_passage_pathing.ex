@@ -1,5 +1,5 @@
-defmodule AdventOfCode2021.Day12PassagePathing do
-  use AdventOfCode2021
+defmodule AdventOfCode.Aoc2021.Day12PassagePathing do
+  use AdventOfCode
 
   def part_1(input) do
     input
@@ -17,16 +17,16 @@ defmodule AdventOfCode2021.Day12PassagePathing do
   end
 
   defp traverse(_connections, [], solutions, _opts), do: solutions
-  defp traverse(connections, [path | paths], solutions, opts) do
 
-    {fragments, more_solutions}
-      = expand(connections, path, opts)
+  defp traverse(connections, [path | paths], solutions, opts) do
+    {fragments, more_solutions} =
+      expand(connections, path, opts)
 
     traverse(connections, fragments ++ paths, more_solutions ++ solutions, opts)
   end
 
   def expand(connections, {[head | _] = path, visited, single}, opts) do
-    allow_single? = (Keyword.get(opts, :part, false) == :part_2)
+    allow_single? = Keyword.get(opts, :part, false) == :part_2
 
     Map.get(connections, head, [])
     |> Enum.reduce([], fn
@@ -39,9 +39,12 @@ defmodule AdventOfCode2021.Day12PassagePathing do
         |> case do
           false ->
             [{[child | path], MapSet.put(visited, child), single} | acc]
+
           true when allow_single? and is_nil(single) and child != :start and child != :end ->
             [{[child | path], MapSet.put(visited, child), child} | acc]
-          true -> acc
+
+          true ->
+            acc
         end
     end)
     |> Enum.group_by(fn
@@ -62,14 +65,14 @@ defmodule AdventOfCode2021.Day12PassagePathing do
     input
     |> String.split("\n")
     |> Enum.reduce(%{}, fn line, map ->
-      [{a, _} = ap,{b,_} = bp] =
+      [{a, _} = ap, {b, _} = bp] =
         line
         |> String.split("-")
         |> Enum.map(fn str -> {String.to_atom(str), upcase?(str)} end)
 
       map
-      |> Map.update(a, [bp], &([bp | &1]))
-      |> Map.update(b, [ap], &([ap | &1]))
+      |> Map.update(a, [bp], &[bp | &1])
+      |> Map.update(b, [ap], &[ap | &1])
     end)
   end
 end

@@ -1,7 +1,7 @@
-defmodule AdventOfCode2021.Day6LanternfishTest do
+defmodule AdventOfCode.Aoc2021.Day6LanternfishTest do
   use ExUnit.Case
 
-  import AdventOfCode2021.Day6Lanternfish
+  import AdventOfCode.Aoc2021.Day6Lanternfish
 
   @example_input """
   3,4,3,1,2

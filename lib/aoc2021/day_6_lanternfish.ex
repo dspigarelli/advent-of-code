@@ -1,5 +1,5 @@
-defmodule AdventOfCode2021.Day6Lanternfish do
-  use AdventOfCode2021
+defmodule AdventOfCode.Aoc2021.Day6Lanternfish do
+  use AdventOfCode
 
   def part_1(input) do
     input
@@ -23,10 +23,12 @@ defmodule AdventOfCode2021.Day6Lanternfish do
       List.duplicate(0, 9),
       fn x, acc ->
         List.update_at(acc, x, &(&1 + 1))
-      end)
+      end
+    )
   end
 
   defp generation(fish, 0), do: fish
+
   defp generation(fish, x) do
     [cnt | fish] = fish
 

@@ -1,7 +1,7 @@
-defmodule AdventOfCode2021.Day7TheTreacheryOfWhalesTest do
+defmodule AdventOfCode.Aoc2021.Day7TheTreacheryOfWhalesTest do
   use ExUnit.Case
 
-  import AdventOfCode2021.Day7TheTreacheryOfWhales
+  import AdventOfCode.Aoc2021.Day7TheTreacheryOfWhales
 
   @example_input """
   16,1,2,0,4,2,7,1,2,14

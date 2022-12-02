@@ -1,12 +1,12 @@
-defmodule AdventOfCode2021.Day4GiantSquid do
-  use AdventOfCode2021
+defmodule AdventOfCode.Aoc2021.Day4GiantSquid do
+  use AdventOfCode
 
   def part_1(input) do
     input
     |> parse
     |> solve
     |> Enum.reduce(fn
-      {x, _} = new , {y, _} when x > y -> new
+      {x, _} = new, {y, _} when x > y -> new
       _, acc -> acc
     end)
     |> case do
@@ -19,7 +19,7 @@ defmodule AdventOfCode2021.Day4GiantSquid do
     |> parse
     |> solve()
     |> Enum.reduce(fn
-      {x, _} = new , {y, _} when x < y -> new
+      {x, _} = new, {y, _} when x < y -> new
       _, acc -> acc
     end)
     |> case do
@@ -39,7 +39,7 @@ defmodule AdventOfCode2021.Day4GiantSquid do
       boards
       |> Enum.map(&parse_board/1)
 
-    { answers, boards}
+    {answers, boards}
   end
 
   defp solve({answers, boards}) do
@@ -49,6 +49,7 @@ defmodule AdventOfCode2021.Day4GiantSquid do
   end
 
   defp iterate_board(board, []), do: board
+
   defp iterate_board(board, answers) do
     [value | rest] = answers
 
@@ -57,7 +58,7 @@ defmodule AdventOfCode2021.Day4GiantSquid do
     board
     |> any_empty_rows?()
     |> case do
-      true -> { length(answers), value * sum_board(board) / 2 |> round() }
+      true -> {length(answers), (value * sum_board(board) / 2) |> round()}
       false -> iterate_board(board, rest)
     end
   end

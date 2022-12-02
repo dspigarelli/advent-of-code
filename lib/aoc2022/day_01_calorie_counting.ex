@@ -1,5 +1,5 @@
-defmodule AdventOfCode2021.Day01CalorieCounting do
-  use AdventOfCode2021
+defmodule AdventOfCode.Aoc2022.Day01CalorieCounting do
+  use AdventOfCode
 
   def part_1(input) do
     input

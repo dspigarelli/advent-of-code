@@ -1,7 +1,7 @@
-defmodule AdventOfCode2021.Day9SmokeBasinTest do
+defmodule AdventOfCode.Aoc2021.Day9SmokeBasinTest do
   use ExUnit.Case
 
-  import AdventOfCode2021.Day9SmokeBasin
+  import AdventOfCode.Aoc2021.Day9SmokeBasin
 
   @example_input """
   2199943210

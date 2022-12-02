@@ -1,7 +1,7 @@
-defmodule AdventOfCode2021.Day2DiveTest do
+defmodule AdventOfCode.Aoc2021.Day2DiveTest do
   use ExUnit.Case
 
-  import AdventOfCode2021.Day2Dive
+  import AdventOfCode.Aoc2021.Day2Dive
 
   @example_input """
   forward 5

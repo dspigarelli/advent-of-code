@@ -1,5 +1,5 @@
-defmodule AdventOfCode2021.Day5HydrothermalVenture do
-  use AdventOfCode2021
+defmodule AdventOfCode.Aoc2021.Day5HydrothermalVenture do
+  use AdventOfCode
 
   def part_1(input) do
     input
@@ -22,9 +22,11 @@ defmodule AdventOfCode2021.Day5HydrothermalVenture do
     list
     |> Enum.map(fn
       {[x, y], [x2, y]} ->
-        Enum.map(x..x2, fn x -> [x,y] end)
+        Enum.map(x..x2, fn x -> [x, y] end)
+
       {[x, y], [x, y2]} ->
-        Enum.map(y..y2, fn y -> [x,y] end)
+        Enum.map(y..y2, fn y -> [x, y] end)
+
       {[x, y], [x2, y2]} ->
         [
           Enum.to_list(x..x2),

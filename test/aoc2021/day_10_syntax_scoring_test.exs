@@ -1,7 +1,7 @@
-defmodule AdventOfCode2021.Day10SyntaxScoringTest do
+defmodule AdventOfCode.Aoc2021.Day10SyntaxScoringTest do
   use ExUnit.Case
 
-  import AdventOfCode2021.Day10SyntaxScoring
+  import AdventOfCode.Aoc2021.Day10SyntaxScoring
 
   @example_input """
   [({(<(())[]>[[{[]{<()<>>

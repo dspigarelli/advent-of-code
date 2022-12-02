@@ -1,11 +1,11 @@
-defmodule AdventOfCode2021 do
+defmodule AdventOfCode do
   @moduledoc """
-  Documentation for `AdventOfCode2021`.
+  Documentation for `AdventOfCode`.
   """
 
   defmacro __using__(options) do
     quote do
-      import AdventOfCode2021
+      import AdventOfCode
 
       @doc """
       Inspired by https://github.com/scmx/advent-of-code-2020-elixir
@@ -23,20 +23,32 @@ defmodule AdventOfCode2021 do
     |> read_puzzle_input_for(options)
   end
 
-  def read_puzzle_input_for(filename, options) when is_binary(filename) do
-    case File.read(Path.join(["input", filename <> ".txt"])) do
+  def read_puzzle_input_for([year, filename], options) when is_binary(filename) do
+    ["input", year, filename <> ".txt"]
+    |> Path.join()
+    |> File.read()
+    |> case do
       {:ok, data} -> trim(data, Keyword.get(options, :trim))
       {:error, _} -> nil
     end
   end
 
   defp input_filename(module) do
-    module
-    |> to_string()
-    |> String.split(".")
-    |> Enum.at(2)
-    |> Macro.underscore()
-    |> String.replace(~r/(\w)(\d)/, "\\1_\\2")
+    [year, day] =
+      module
+      |> to_string()
+      |> String.split(".")
+      |> Enum.drop(2)
+
+    year
+    |> String.downcase()
+
+    [
+      String.downcase(year),
+      day
+      |> Macro.underscore()
+      |> String.replace(~r/(\w)(\d)/, "\\1_\\2")
+    ]
   end
 
   defp trim(text, false), do: String.trim_trailing(text, "\n")

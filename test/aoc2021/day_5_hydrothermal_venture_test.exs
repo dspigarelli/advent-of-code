@@ -1,7 +1,7 @@
-defmodule AdventOfCode2021.Day5HydrothermalVentureTest do
+defmodule AdventOfCode.Aoc2021.Day5HydrothermalVentureTest do
   use ExUnit.Case
 
-  import AdventOfCode2021.Day5HydrothermalVenture
+  import AdventOfCode.Aoc2021.Day5HydrothermalVenture
 
   @example_input """
   0,9 -> 5,9

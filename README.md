@@ -1,4 +1,4 @@
-# AdventOfCode2021
+# AdventOfCode
 
 To run tests continuously:
 

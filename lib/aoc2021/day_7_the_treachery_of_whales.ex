@@ -1,5 +1,5 @@
-defmodule AdventOfCode2021.Day7TheTreacheryOfWhales do
-  use AdventOfCode2021
+defmodule AdventOfCode.Aoc2021.Day7TheTreacheryOfWhales do
+  use AdventOfCode
 
   def part_1(input) do
     numbers = parse(input)
@@ -19,14 +19,14 @@ defmodule AdventOfCode2021.Day7TheTreacheryOfWhales do
 
   defp count_fuel(spot, numbers) do
     numbers
-    |> Enum.map(&(abs(&1 - spot)))
+    |> Enum.map(&abs(&1 - spot))
     |> Enum.sum()
   end
 
   defp count_fuel_2(spot, numbers) do
     numbers
-    |> Enum.map(&(abs(&1 - spot)))
-    |> Enum.map(&((&1 * (&1 + 1)) / 2) |> floor())
+    |> Enum.map(&abs(&1 - spot))
+    |> Enum.map(&((&1 * (&1 + 1) / 2) |> floor()))
     |> Enum.sum()
   end
 

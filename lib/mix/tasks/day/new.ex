@@ -3,6 +3,8 @@ defmodule Mix.Tasks.Day.New do
   Generate a new day. Inspired by https://github.com/scmx/advent-of-code-2020-elixir
   """
 
+  @year 2022
+
   def run([name]) do
     module_name = Macro.camelize(name)
 
@@ -12,23 +14,23 @@ defmodule Mix.Tasks.Day.New do
   end
 
   defp create_input_file(name) do
-    File.write("input/#{name}.txt", IO.read(:stdio, :all))
+    File.write("input/aoc#{@year}/#{name}.txt", IO.read(:stdio, :all))
   end
 
   defp create_lib_file(name, module_name) do
     contents = generate_lib_file(name, module_name)
-    File.write("lib/#{name}.ex", contents)
+    File.write("lib/aoc#{@year}/#{name}.ex", contents)
   end
 
   defp create_spec_file(name, module_name) do
     contents = generate_spec_file(name, module_name)
-    File.write("test/#{name}_test.exs", contents)
+    File.write("test/aoc#{@year}/#{name}_test.exs", contents)
   end
 
   defp generate_lib_file(_name, module_name) do
     """
-    defmodule AdventOfCode2021.#{module_name} do
-      use AdventOfCode2021
+    defmodule AdventOfCode.Aoc#{@year}.#{module_name} do
+      use AdventOfCode
 
       def part_1(input) do
         input
@@ -49,10 +51,10 @@ defmodule Mix.Tasks.Day.New do
 
   defp generate_spec_file(_name, module_name) do
     """
-    defmodule AdventOfCode2021.#{module_name}Test do
+    defmodule AdventOfCode.Aoc#{@year}.#{module_name}Test do
       use ExUnit.Case
 
-      import AdventOfCode2021.#{module_name}
+      import AdventOfCode.Aoc#{@year}.#{module_name}
 
       @example_input \"\"\"
       \"\"\"

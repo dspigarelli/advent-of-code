@@ -1,37 +1,42 @@
-defmodule AdventOfCode2021.Day11DumboOctopus do
-  use AdventOfCode2021
+defmodule AdventOfCode.Aoc2021.Day11DumboOctopus do
+  use AdventOfCode
 
   def part_1(input) do
-    { map, {_length, _height } = dimensions, neighbors} = parse(input)
+    {map, {_length, _height} = dimensions, neighbors} = parse(input)
 
     iterate(map, {99, 0, dimensions, neighbors})
   end
 
   def part_2(input) do
-    { map, {_length, _height } = dimensions, neighbors} = parse(input)
+    {map, {_length, _height} = dimensions, neighbors} = parse(input)
 
     iterate2(map, {0, 0, dimensions, neighbors})
   end
 
   defp build_neighbors(map, {x, y} = point, {length, height}) do
-    Map.put(map, point, [
-      {x-1, y-1},
-      {x-1, y},
-      {x-1, y+1},
-      {x, y-1},
-      {x, y+1},
-      {x+1, y-1},
-      {x+1, y},
-      {x+1, y+1},
-    ]
-    |> Enum.filter(fn
-      {x, _} when x < 0 or x >= length -> false
-      {_, y} when y < 0 or y >= height -> false
-      _ -> true
-    end))
+    Map.put(
+      map,
+      point,
+      [
+        {x - 1, y - 1},
+        {x - 1, y},
+        {x - 1, y + 1},
+        {x, y - 1},
+        {x, y + 1},
+        {x + 1, y - 1},
+        {x + 1, y},
+        {x + 1, y + 1}
+      ]
+      |> Enum.filter(fn
+        {x, _} when x < 0 or x >= length -> false
+        {_, y} when y < 0 or y >= height -> false
+        _ -> true
+      end)
+    )
   end
 
   defp iterate(_map, {-1, flashes, _, _}), do: flashes
+
   defp iterate(map, {count, flashes, dimensions, neighbors}) do
     # IO.puts("")
     # print(map, dimensions)
@@ -39,8 +44,7 @@ defmodule AdventOfCode2021.Day11DumboOctopus do
     # increment everything by 1;
     map = advance(map, dimensions)
 
-    {map, flashes} =
-      calculate_flashes(map, flashes, dimensions, neighbors)
+    {map, flashes} = calculate_flashes(map, flashes, dimensions, neighbors)
 
     iterate(map, {count - 1, flashes, dimensions, neighbors})
   end
@@ -53,16 +57,17 @@ defmodule AdventOfCode2021.Day11DumboOctopus do
     # increment everything by 1;
     map = advance(map, dimensions)
 
-    {map, flashes} =
-      calculate_flashes(map, flashes, dimensions, neighbors)
+    {map, flashes} = calculate_flashes(map, flashes, dimensions, neighbors)
 
     map_sum(map, dimensions)
     |> case do
       0 ->
         # print(map, dimensions)
         # IO.puts("Count: #{count+1}")
-        count+1
-      _ -> iterate2(map, {count + 1, flashes, dimensions, neighbors})
+        count + 1
+
+      _ ->
+        iterate2(map, {count + 1, flashes, dimensions, neighbors})
     end
   end
 
@@ -82,15 +87,14 @@ defmodule AdventOfCode2021.Day11DumboOctopus do
     |> Enum.reduce({map, 0}, fn point, acc -> maybe_flashes(point, acc, neighbors) end)
     |> case do
       {map, 0} -> {map, flashes}
-      {map, new_flashes} -> calculate_flashes(map, flashes+new_flashes, dimensions, neighbors)
+      {map, new_flashes} -> calculate_flashes(map, flashes + new_flashes, dimensions, neighbors)
     end
   end
 
   defp maybe_flashes(point, {map, flashes}, neighbors) do
-
     Map.get(map, point)
     |> case do
-      x when x >= 10 -> { flash_point_and_neighbors(map, point, neighbors), flashes+1 }
+      x when x >= 10 -> {flash_point_and_neighbors(map, point, neighbors), flashes + 1}
       _ -> {map, flashes}
     end
   end
@@ -112,7 +116,8 @@ defmodule AdventOfCode2021.Day11DumboOctopus do
     end
   end
 
-  defp all_points({length, height}), do: (for y <- 0..(height-1), x <- 0..(length-1), do: {x,y})
+  defp all_points({length, height}),
+    do: for(y <- 0..(height - 1), x <- 0..(length - 1), do: {x, y})
 
   # defp print(map, {length, height}) do
   #   for y <- 0..(height-1) do
@@ -155,6 +160,6 @@ defmodule AdventOfCode2021.Day11DumboOctopus do
       |> all_points()
       |> Enum.reduce(%{}, fn point, map -> build_neighbors(map, point, dimensions) end)
 
-    { map, dimensions, neighbors}
+    {map, dimensions, neighbors}
   end
 end

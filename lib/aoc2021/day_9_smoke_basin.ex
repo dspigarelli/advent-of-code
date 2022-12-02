@@ -1,5 +1,5 @@
-defmodule AdventOfCode2021.Day9SmokeBasin do
-  use AdventOfCode2021
+defmodule AdventOfCode.Aoc2021.Day9SmokeBasin do
+  use AdventOfCode
 
   def part_1(input) do
     lists = parse(input)

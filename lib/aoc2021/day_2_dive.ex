@@ -1,5 +1,5 @@
-defmodule AdventOfCode2021.Day2Dive do
-  use AdventOfCode2021
+defmodule AdventOfCode.Aoc2021.Day2Dive do
+  use AdventOfCode
 
   def part_1(input) do
     input

@@ -1,7 +1,7 @@
-defmodule AdventOfCode2021.Day3BinaryDiagnosticTest do
+defmodule AdventOfCode.Aoc2021.Day3BinaryDiagnosticTest do
   use ExUnit.Case
 
-  import AdventOfCode2021.Day3BinaryDiagnostic
+  import AdventOfCode.Aoc2021.Day3BinaryDiagnostic
 
   @example_input """
   00100

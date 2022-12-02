@@ -1,7 +1,7 @@
-defmodule AdventOfCode2021.Day8SevenSegmentSearchTest do
+defmodule AdventOfCode.Aoc2021.Day8SevenSegmentSearchTest do
   use ExUnit.Case
 
-  import AdventOfCode2021.Day8SevenSegmentSearch
+  import AdventOfCode.Aoc2021.Day8SevenSegmentSearch
 
   @example_input """
   be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe

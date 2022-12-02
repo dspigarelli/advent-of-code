@@ -1,7 +1,7 @@
-defmodule AdventOfCode2021.Day01CalorieCountingTest do
+defmodule AdventOfCode.Aoc2022.Day01CalorieCountingTest do
   use ExUnit.Case
 
-  import AdventOfCode2021.Day01CalorieCounting
+  import AdventOfCode.Aoc2022.Day01CalorieCounting
 
   @example_input """
   1000

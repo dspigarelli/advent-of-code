@@ -1,12 +1,12 @@
-defmodule AdventOfCode2021.Day8SevenSegmentSearch do
-  use AdventOfCode2021
+defmodule AdventOfCode.Aoc2021.Day8SevenSegmentSearch do
+  use AdventOfCode
 
   def part_1(input) do
     input
     |> parse
     |> Enum.flat_map(fn [_first, second] -> second end)
     |> Enum.map(&String.length/1)
-    |> Enum.count(&Enum.member?([2,3,4,7], &1))
+    |> Enum.count(&Enum.member?([2, 3, 4, 7], &1))
   end
 
   def part_2(input) do
@@ -18,7 +18,7 @@ defmodule AdventOfCode2021.Day8SevenSegmentSearch do
       |> Enum.map(&Map.get(map, &1))
       |> Enum.map(&Integer.to_string/1)
       |> Enum.join()
-      |> String.to_integer
+      |> String.to_integer()
     end)
     |> Enum.sum()
   end
@@ -37,7 +37,7 @@ defmodule AdventOfCode2021.Day8SevenSegmentSearch do
       1 => Map.get(lookup, 2) |> List.first(),
       7 => Map.get(lookup, 3) |> List.first(),
       4 => Map.get(lookup, 4) |> List.first(),
-      8 => Map.get(lookup, 7) |> List.first(),
+      8 => Map.get(lookup, 7) |> List.first()
     }
     |> assign_sixes(Map.get(lookup, 6))
     |> assign_fives(Map.get(lookup, 5))
@@ -57,9 +57,9 @@ defmodule AdventOfCode2021.Day8SevenSegmentSearch do
 
   defp group_by_segment_count(digits) do
     digits
-      |> Enum.map(&String.graphemes/1)
-      |> Enum.map(&MapSet.new/1)
-      |> Enum.group_by(&MapSet.size/1)
+    |> Enum.map(&String.graphemes/1)
+    |> Enum.map(&MapSet.new/1)
+    |> Enum.group_by(&MapSet.size/1)
   end
 
   defp assign_fives(%{7 => seven, 6 => six} = map, candidates) do
@@ -72,8 +72,8 @@ defmodule AdventOfCode2021.Day8SevenSegmentSearch do
     Map.merge(map, %{2 => two, 3 => three, 5 => five})
   end
 
-  defp str_to_mapset(str), do: str |> String.graphemes |> MapSet.new
-  defp mapset_to_str(mapset), do: mapset |> MapSet.to_list |> Enum.join("")
+  # defp str_to_mapset(str), do: str |> String.graphemes() |> MapSet.new()
+  defp mapset_to_str(mapset), do: mapset |> MapSet.to_list() |> Enum.join("")
 
   defp sort_strings(strings) do
     strings

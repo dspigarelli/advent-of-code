@@ -1,7 +1,7 @@
-defmodule AdventOfCode2021.Day11DumboOctopusTest do
+defmodule AdventOfCode.Aoc2021.Day11DumboOctopusTest do
   use ExUnit.Case
 
-  import AdventOfCode2021.Day11DumboOctopus
+  import AdventOfCode.Aoc2021.Day11DumboOctopus
 
   @example_input """
   5483143223

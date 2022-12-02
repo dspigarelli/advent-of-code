@@ -1,7 +1,7 @@
-defmodule AdventOfCode2021.Day1SonarSweepTest do
+defmodule AdventOfCode.Aoc2021.Day1SonarSweepTest do
   use ExUnit.Case
 
-  import AdventOfCode2021.Day1SonarSweep
+  import AdventOfCode.Aoc2021.Day1SonarSweep
 
   @example_input """
   199

@@ -1,7 +1,7 @@
-defmodule AdventOfCode2021.Day12PassagePathingTest do
+defmodule AdventOfCode.Aoc2021.Day12PassagePathingTest do
   use ExUnit.Case
 
-  import AdventOfCode2021.Day12PassagePathing
+  import AdventOfCode.Aoc2021.Day12PassagePathing
 
   @example_input """
   start-A
