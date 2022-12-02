@@ -19,8 +19,7 @@ defmodule AdventOfCode.Aoc2021.Day12PassagePathing do
   defp traverse(_connections, [], solutions, _opts), do: solutions
 
   defp traverse(connections, [path | paths], solutions, opts) do
-    {fragments, more_solutions} =
-      expand(connections, path, opts)
+    {fragments, more_solutions} = expand(connections, path, opts)
 
     traverse(connections, fragments ++ paths, more_solutions ++ solutions, opts)
   end
