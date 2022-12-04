@@ -21,6 +21,7 @@ defmodule AdventOfCode.Aoc2022.Day03RucksackReorganisation do
     |> Enum.chunk_every(3)
     |> Enum.flat_map(fn sacks ->
       [first, second, third] = Enum.map(sacks, &MapSet.new/1)
+
       first
       |> MapSet.intersection(second)
       |> MapSet.intersection(third)
