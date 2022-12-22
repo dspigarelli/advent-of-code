@@ -6,9 +6,7 @@ defmodule AdventOfCode.Aoc2022.Day10CathodeRayTube do
     |> parse
     |> Enum.reduce([1], &process/2)
     |> Enum.reverse()
-    # not sure why I had to add an extra cycle...
-    |> then(fn tail -> [1 | tail] end)
-    |> Enum.slice(20..-1)
+    |> Enum.slice(19..-1)
     |> Enum.take_every(40)
     |> Enum.with_index()
     |> Enum.reduce(0, fn {value, index}, total ->
@@ -21,10 +19,22 @@ defmodule AdventOfCode.Aoc2022.Day10CathodeRayTube do
   defp process("addx " <> count, [x | _] = values),
     do: [x + String.to_integer(count), x | values]
 
-  # def part_2(input) do
-  #   input
-  #   |> parse
-  # end
+  def part_2(input) do
+    input
+    |> parse
+    |> Enum.reduce([1], &process/2)
+    # do i still need to add an extra cycle? probably not
+    |> then(fn x -> [1 | x] end)
+    |> Enum.reverse()
+    |> Enum.with_index()
+    |> Enum.map(fn
+      {x, pixel} when rem(pixel, 40) >= x-1 and rem(pixel, 40) <= x+1 -> "#"
+      _ -> "."
+    end)
+    |> Enum.chunk_every(40)
+    |> Enum.map(&Enum.join(&1, ""))
+    |> Enum.join("\n")
+  end
 
   defp parse(input) do
     input

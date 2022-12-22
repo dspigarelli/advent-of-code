@@ -169,12 +169,30 @@ defmodule AdventOfCode.Aoc2022.Day10CathodeRayTubeTest do
   end
 
   describe "part_2/1" do
-    # test "example input" do
-    #   assert 0 = @example_input |> String.trim() |> part_2()
-    # end
+    test "example input" do
+      answer = """
+      ##..##..##..##..##..##..##..##..##..##..
+      ###...###...###...###...###...###...###.
+      ####....####....####....####....####....
+      #####.....#####.....#####.....#####.....
+      ######......######......######......####
+      #######.......#######.......#######.....
+      .#\
+      """
+      assert answer == @example_input |> String.trim() |> part_2()
+    end
 
-    # test "with puzzle input" do
-    #   assert 0 = puzzle_input() |> String.trim() |> part_2()
-    # end
+    test "with puzzle input" do
+      answer = """
+      ####.####..##..####.####.#....#..#.####.
+      #....#....#..#....#.#....#....#..#.#....
+      ###..###..#......#..###..#....####.###..
+      #....#....#.....#...#....#....#..#.#....
+      #....#....#..#.#....#....#....#..#.#....
+      #....####..##..####.####.####.#..#.####.
+      .#\
+      """
+      assert answer == puzzle_input() |> String.trim() |> part_2()
+    end
   end
 end
