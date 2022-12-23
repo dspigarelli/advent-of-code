@@ -18,7 +18,8 @@ defmodule AdventOfCode.Aoc2022.Day11MonkeyInTheMiddle do
         items
         |> String.split(", ")
         |> Enum.map(&String.to_integer/1)
-        # |> Enum.reverse()
+
+      # |> Enum.reverse()
 
       Map.put(monkey, :items, items)
     end
@@ -47,87 +48,75 @@ defmodule AdventOfCode.Aoc2022.Day11MonkeyInTheMiddle do
       do: monkey |> Map.put(:op_str, op) |> Map.put(:op, &(&1 + String.to_integer(id)))
 
     def process(monkey, monkeys, worry \\ 3) do
-      source = Enum.find_index(monkeys, & &1.id == monkey.id)
-      yes_index = Enum.find_index(monkeys, & &1.id == monkey.yes)
-      no_index = Enum.find_index(monkeys, & &1.id == monkey.no)
+      source = Enum.find_index(monkeys, &(&1.id == monkey.id))
+
+      yes_index = Enum.find_index(monkeys, &(&1.id == monkey.yes))
+      yes_monkey = Enum.at(monkeys, yes_index)
+
+      no_index = Enum.find_index(monkeys, &(&1.id == monkey.no))
+      no_monkey = Enum.at(monkeys, no_index)
+
       monkey = Enum.at(monkeys, source)
 
-      {yes, no} = monkey.items
-      |> Enum.map(fn item ->
-        item
-        |> monkey.op.()
-        |> div(worry)
-      end)
-      |> Enum.split_with(&rem(&1, monkey.divisor) == 0)
-      # |> IO.inspect(label: :split)
-      # |> Enum.reduce(monkeys, fn item, monkeys ->
+      {yes, no} =
+        monkey.items
+        |> Enum.reduce({yes_monkey.items, no_monkey.items}, fn item, {yes, no} ->
+          item =
+            item
+            |> monkey.op.()
+            |> div(worry)
 
-      #   item = item
-      #   |> monkey.op.()
-      #   # |> IO.inspect(label: :step1)
-      #   |> div(worry)
-      #   # |> IO.inspect(label: :step2)
+          item
+          |> rem(monkey.divisor)
+          |> case do
+            x when x == 0 -> {[item | yes], no}
+            _ -> {yes, [item | no]}
+          end
+        end)
 
-      #   target = item
-      #   |> rem(monkey.divisor)
-      #   # |> IO.inspect(label: :step3)
-      #   |> case do
-      #     x when x == 0 ->
-      #       Enum.find_index(monkeys, & &1.id == monkey.yes)
-      #     _ ->
-      #       Enum.find_index(monkeys, & &1.id == monkey.no)
-      #   end
-
-      #   monkeys
-      #   |> List.update_at(target, &Map.update(&1, :items, [], fn items -> [item|items] end))
-      #   # |> IO.inspect(label: :monkeys)
-      # end)
+      # |> Enum.split_with(&(rem(&1, monkey.divisor) == 0))
 
       monkeys
-      |> List.update_at(yes_index, fn monkey -> Map.update(monkey, :items, [], & &1 ++ yes) end)
-      |> List.update_at(no_index, fn monkey -> Map.update(monkey, :items, [], & &1 ++ no) end)
+      |> List.update_at(yes_index, &Map.put(&1, :items, yes))
+      |> List.update_at(no_index, &Map.put(&1, :items, no))
       |> List.update_at(source, fn monkey ->
         monkey
         |> Map.put(:items, [])
-        |> Map.update(:inspected, 0, & &1+length(monkey.items))
+        |> Map.update(:inspected, 0, &(&1 + length(monkey.items)))
       end)
-      # |> IO.inspect(label: :monkeys)
     end
   end
 
   def part_1(input) do
-    input
-    |> parse
-    # |> IO.inspect(label: :monkey_start)
-    |> Stream.iterate(fn monkeys -> Enum.reduce(monkeys, monkeys, &Monkey.process/2) end)
-    |> Enum.take(21)
-    |> Enum.reverse()
-    |> hd()
-    |> Enum.sort_by(& &1.inspected)
+    monkeys = parse(input)
+
+    1..20
+    |> Enum.reduce(monkeys, fn _, monkeys ->
+      Enum.reduce(monkeys, monkeys, &Monkey.process/2)
+    end)
+    |> Enum.map(& &1.inspected)
+    # |> IO.inspect(label: :monkeys, charlists: :as_lists)
+    |> Enum.sort()
     |> Enum.reverse()
     |> Enum.take(2)
-    |> Enum.map(& &1.inspected)
     |> Enum.product()
-    # |> IO.inspect(label: :monkeys)
   end
 
   def part_2(input) do
     monkeys = parse(input)
 
-    0..19
+    1..20
     |> Enum.reduce(monkeys, fn _, monkeys ->
+      IO.write(".")
       Enum.reduce(monkeys, monkeys, &Monkey.process(&1, &2, 1))
     end)
-    # |> parse
-    # |> IO.inspect(label: :monkey_start)
-    # |> Stream.iterate(fn monkeys -> Enum.reduce(monkeys, monkeys, &Monkey.process(&1, &2, 1)) end)
-    # |> Enum.take(401)
-    # |> Enum.reverse()
-    # |> hd()
-    # |> Enum.sort_by(& &1.inspected)
-    # # |> Enum.reverse()
-    # # |> Enum.take(2)
     |> Enum.map(& &1.inspected)
+    |> IO.inspect(label: :monkeys, charlists: :as_lists)
+    |> Enum.sort()
+
+    # |> Enum.reverse()
+    # |> Enum.take(2)
+    # |> Enum.product()
   end
 
   defp parse(input) do

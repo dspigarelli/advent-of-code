@@ -44,9 +44,9 @@ defmodule AdventOfCode.Aoc2022.Day11MonkeyInTheMiddleTest do
   end
 
   describe "part_2/1" do
-    test "example input" do
-      assert 0 = @example_input |> String.trim() |> part_2()
-    end
+    # test "example input" do
+    #   assert 2_713_310_158 = @example_input |> String.trim() |> part_2()
+    # end
 
     # test "with puzzle input" do
     #   assert 0 = puzzle_input() |> String.trim() |> part_2()
